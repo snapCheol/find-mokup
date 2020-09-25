@@ -1,20 +1,31 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import {
   changeDate,
   changeField,
   changeFile,
   changeSelect,
-} from '../../actions/post';
-import Post from '../../components/post/Post';
+  writePost,
+} from '../../actions/write';
+import Write from '../../components/write/Write';
 import { RootState } from '../../reducers';
 
-const PostContainer = () => {
+const WriteContainer = () => {
   const dispatch = useDispatch();
-  const { imgUrl } = useSelector((state: RootState) => state.post);
+  const history = useHistory();
+  const { imgUrl, title, category, manager, date, year, month } = useSelector(
+    (state: RootState) => state.write
+  );
 
-  const onSubmit = () => {};
-  const onCancel = () => {};
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    dispatch(
+      writePost({ imgUrl, title, category, manager, date, year, month })
+    );
+  };
+  const onCancel = () => {
+    history.goBack();
+  };
   const onChangeField = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value, name } = e.target;
@@ -35,7 +46,7 @@ const PostContainer = () => {
   );
 
   const onDateChange = useCallback(
-    (value) => {
+    (date, value) => {
       dispatch(changeDate(value));
     },
     [dispatch]
@@ -59,7 +70,7 @@ const PostContainer = () => {
   );
 
   return (
-    <Post
+    <Write
       imgUrl={imgUrl}
       onSubmit={onSubmit}
       onCancel={onCancel}
@@ -71,4 +82,4 @@ const PostContainer = () => {
   );
 };
 
-export default PostContainer;
+export default WriteContainer;
