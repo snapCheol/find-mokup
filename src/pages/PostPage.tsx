@@ -1,8 +1,8 @@
 import React from 'react';
-import Post from '../components/post/Post';
+import PostContainer from '../containers/post/PostContainer';
 
-const WritePage = () => {
-  return <Post />;
+const PostPage = () => {
+  return <PostContainer />;
 };
 
-export default WritePage;
+export default PostPage;

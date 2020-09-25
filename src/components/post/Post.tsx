@@ -10,10 +10,30 @@ import {
   Select,
   Space,
 } from 'antd';
-import moment from 'moment';
+import { Moment } from 'moment';
+import locale from 'antd/es/date-picker/locale/ko_KR';
 
-const Post = () => {
+type PostProps = {
+  imgUrl: any;
+  onSubmit: () => void;
+  onCancel: () => void;
+  onChangeField: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSelect: (value: string) => void;
+  onDateChange: (value: Moment | null) => void;
+  onFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+const Post = ({
+  imgUrl,
+  onSubmit,
+  onCancel,
+  onChangeField,
+  onSelect,
+  onDateChange,
+  onFileChange,
+}: PostProps) => {
   const { Option } = Select;
+  const monthFormat = 'YYYY/MM';
   return (
     <>
       <Row justify="center">
@@ -22,18 +42,20 @@ const Post = () => {
           <Descriptions layout="vertical" bordered column={1}>
             <Descriptions.Item label="이미지 등록">
               <figure style={{ textAlign: 'center' }}>
-                <img
-                  src="https://via.placeholder.com/200C/O https://placeholder.com/"
-                  alt=""
-                />
+                <img src={imgUrl} alt="" />
               </figure>
-              <Input type="file" />
+              <Input
+                type="file"
+                accept="image/*"
+                onChange={onFileChange}
+                required
+              />
             </Descriptions.Item>
             <Descriptions.Item label="시안 종류">
               <Select
                 defaultValue="시안 종류를 선택해주세요."
                 style={{ width: '100%' }}
-                onChange={() => {}}>
+                onChange={onSelect}>
                 <Option value="brochure">브로셔</Option>
                 <Option value="catalogue">카달로그</Option>
                 <Option value="leaflet">리플렛</Option>
@@ -41,12 +63,15 @@ const Post = () => {
               </Select>
             </Descriptions.Item>
             <Descriptions.Item label="작업자">
-              <Input type="text" />
+              <Input type="text" name="manager" onChange={onChangeField} />
             </Descriptions.Item>
             <Descriptions.Item label="작업 날짜">
               <DatePicker
+                name="workDate"
                 picker="month"
-                defaultValue={moment('2015-06', 'YYYY-MM')}
+                locale={locale}
+                onChange={onDateChange}
+                format={monthFormat}
               />
             </Descriptions.Item>
           </Descriptions>
@@ -54,8 +79,8 @@ const Post = () => {
       </Row>
       <Row justify="center" style={{ marginTop: '1rem' }}>
         <Col xs={24} lg={14}>
-          <Button>등록</Button>
-          <Button danger style={{ marginLeft: '0.5rem' }}>
+          <Button onClick={onSubmit}>등록</Button>
+          <Button onClick={onCancel} danger style={{ marginLeft: '0.5rem' }}>
             취소
           </Button>
         </Col>
