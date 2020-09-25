@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {
@@ -26,8 +26,7 @@ const WriteContainer = () => {
     previewImg,
   } = useSelector((state: RootState) => state.write);
 
-  const onSubmit = async () => {
-    dispatch(getDonwloadUrl(previewImg));
+  const onSubmit = useCallback(() => {
     dispatch(
       writePost({
         imgUrl,
@@ -39,7 +38,7 @@ const WriteContainer = () => {
         month,
       })
     );
-  };
+  }, [dispatch, imgUrl, title, category, manager, date, year, month]);
   const onCancel = () => {
     history.goBack();
   };
@@ -85,6 +84,12 @@ const WriteContainer = () => {
     },
     [dispatch]
   );
+
+  useEffect(() => {
+    if (previewImg !== '') {
+      dispatch(getDonwloadUrl(previewImg));
+    }
+  }, [dispatch, previewImg]);
 
   return (
     <Write

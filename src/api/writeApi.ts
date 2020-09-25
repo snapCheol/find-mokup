@@ -22,7 +22,7 @@ export const storageWork = async (value: string) => {
   if (value !== '') {
     const attachmentRef = storageService.ref().child(`${uuidv4()}`);
     const response = await attachmentRef.putString(value, 'data_url');
-    attachmentUrl = await response.ref.getDownloadURL();
+    attachmentUrl = response.ref.getDownloadURL();
     console.log(attachmentUrl);
     return attachmentUrl;
   }
