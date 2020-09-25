@@ -6,6 +6,7 @@ import {
   changeField,
   changeFile,
   changeSelect,
+  getDonwloadUrl,
   writePost,
 } from '../../actions/write';
 import Write from '../../components/write/Write';
@@ -14,13 +15,29 @@ import { RootState } from '../../reducers';
 const WriteContainer = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { imgUrl, title, category, manager, date, year, month } = useSelector(
-    (state: RootState) => state.write
-  );
+  const {
+    imgUrl,
+    title,
+    category,
+    manager,
+    date,
+    year,
+    month,
+    previewImg,
+  } = useSelector((state: RootState) => state.write);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async () => {
+    dispatch(getDonwloadUrl(previewImg));
     dispatch(
-      writePost({ imgUrl, title, category, manager, date, year, month })
+      writePost({
+        imgUrl,
+        title,
+        category,
+        manager,
+        date,
+        year,
+        month,
+      })
     );
   };
   const onCancel = () => {
@@ -72,6 +89,7 @@ const WriteContainer = () => {
   return (
     <Write
       imgUrl={imgUrl}
+      previewImg={previewImg}
       onSubmit={onSubmit}
       onCancel={onCancel}
       onChangeField={onChangeField}

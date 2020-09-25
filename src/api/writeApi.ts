@@ -1,7 +1,9 @@
 import { MokupReqType } from '../types/write';
-import { dbService } from './apiConfig';
+import { dbService, storageService } from './apiConfig';
+import { v4 as uuidv4 } from 'uuid';
 
 export const writeWork = async ({
+  title,
   imgUrl,
   category,
   manager,
@@ -10,6 +12,18 @@ export const writeWork = async ({
   month,
 }: MokupReqType) => {
   await dbService
-    .collection(category)
-    .add({ imgUrl, category, manager, date, year, month });
+    .collection('works')
+    .add({ title, imgUrl, category, manager, date, year, month });
+};
+
+export const storageWork = async (value: string) => {
+  console.log(value);
+  let attachmentUrl;
+  if (value !== '') {
+    const attachmentRef = storageService.ref().child(`${uuidv4()}`);
+    const response = await attachmentRef.putString(value, 'data_url');
+    attachmentUrl = await response.ref.getDownloadURL();
+    console.log(attachmentUrl);
+    return attachmentUrl;
+  }
 };

@@ -4,6 +4,9 @@ import {
   CHANGE_FIELD,
   CHANGE_FILE,
   CHANGE_SELECT,
+  GET_DOWNLOAD_URL,
+  GET_DOWNLOAD_URL_FAILURE,
+  GET_DOWNLOAD_URL_SUCCESS,
   WRITE_POST,
   WRITE_POST_FAILURE,
   WRITE_POST_SUCCESS,
@@ -20,6 +23,8 @@ const initialState: MokupResType = {
   month: '',
   post: null,
   postError: null,
+  previewImg: '',
+  getUrlError: null,
 };
 
 const write = handleActions<MokupResType, any>(
@@ -40,7 +45,7 @@ const write = handleActions<MokupResType, any>(
     }),
     [CHANGE_FILE]: (state, { payload: { value } }) => ({
       ...state,
-      imgUrl: value,
+      previewImg: value,
     }),
     [WRITE_POST]: (state) => ({
       ...state,
@@ -54,6 +59,19 @@ const write = handleActions<MokupResType, any>(
     [WRITE_POST_FAILURE]: (state, { payload: error }) => ({
       ...state,
       postError: error,
+    }),
+    [GET_DOWNLOAD_URL]: (state) => ({
+      ...state,
+      getUrlError: null,
+    }),
+    [GET_DOWNLOAD_URL_SUCCESS]: (state, { payload: value }) => ({
+      ...state,
+      imgUrl: value,
+    }),
+
+    [GET_DOWNLOAD_URL_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      getUrlError: error,
     }),
   },
   initialState

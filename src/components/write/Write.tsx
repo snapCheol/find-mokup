@@ -15,6 +15,7 @@ import Form from 'antd/lib/form/Form';
 
 type WriteProps = {
   imgUrl: string;
+  previewImg: string;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   onCancel: () => void;
   onChangeField: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -25,6 +26,7 @@ type WriteProps = {
 
 const Post = ({
   imgUrl,
+  previewImg,
   onSubmit,
   onCancel,
   onChangeField,
@@ -47,7 +49,7 @@ const Post = ({
                     maxWidth: '400px',
                     margin: '0 auto',
                   }}>
-                  <img src={imgUrl} alt="" style={{ maxWidth: '100%' }} />
+                  <img src={previewImg} alt="" style={{ maxWidth: '100%' }} />
                 </figure>
                 <Input
                   type="file"

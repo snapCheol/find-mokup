@@ -13,6 +13,8 @@ export type MokupResType = {
   month: string | null;
   post: any;
   postError: Error | null;
+  previewImg: string;
+  getUrlError: Error | null;
 };
 export type MokupReqType = {
   title: string | null;
