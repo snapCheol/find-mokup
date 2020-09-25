@@ -1,12 +1,12 @@
 import { GET_DOWNLOAD_URL, WRITE_POST } from '../actions/write';
 import createRequestSaga from '../lib/createRequestSaga';
-import * as writeAPI from '../api/writeApi';
+import * as postAPI from '../api/postApi';
 import { takeLatest } from 'redux-saga/effects';
 
-const writeWorkSaga = createRequestSaga(WRITE_POST, writeAPI.writeWork);
+const writeWorkSaga = createRequestSaga(WRITE_POST, postAPI.writeWork);
 const getDownloadUrlSaga = createRequestSaga(
   GET_DOWNLOAD_URL,
-  writeAPI.storageWork
+  postAPI.storageWork
 );
 
 export function* writeSaga() {
