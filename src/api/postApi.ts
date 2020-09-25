@@ -2,6 +2,13 @@ import { MokupReqType } from '../types/write';
 import { dbService, storageService } from './apiConfig';
 import { v4 as uuidv4 } from 'uuid';
 
+export const readPost = async (postId: string) => {
+  const response = await dbService.collection('works').doc(`${postId}`).get();
+  return response.data();
+
+  // return response;
+};
+
 export const writeWork = async ({
   title,
   imgUrl,

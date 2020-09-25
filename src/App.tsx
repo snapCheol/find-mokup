@@ -9,7 +9,7 @@ function App() {
     <>
       <Route component={Home} path="/" exact />
       <Route component={WritePage} path="/write" />
-      <Route component={DetailPage} path="/detail/:id" />
+      <Route component={DetailPage} path="/detail/:postId" />
     </>
   );
 }
