@@ -14,6 +14,8 @@ import locale from 'antd/es/date-picker/locale/ko_KR';
 import Form from 'antd/lib/form/Form';
 
 type WriteProps = {
+  write: any;
+  prevPost: any;
   imgUrl: string;
   previewImg: string;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -25,6 +27,8 @@ type WriteProps = {
 };
 
 const Post = ({
+  write,
+  prevPost,
   imgUrl,
   previewImg,
   onSubmit,
@@ -40,7 +44,7 @@ const Post = ({
       <Form onFinish={onSubmit}>
         <Row justify="center">
           <Col xs={24} lg={14}>
-            <PageHeader onBack={() => {}} title={<Space>목업 등록</Space>} />
+            <PageHeader onBack={onCancel} title={<Space>목업 등록</Space>} />
             <Descriptions layout="vertical" bordered column={1}>
               <Descriptions.Item label="이미지 등록">
                 <figure
@@ -49,7 +53,11 @@ const Post = ({
                     maxWidth: '400px',
                     margin: '0 auto',
                   }}>
-                  <img src={previewImg} alt="" style={{ maxWidth: '100%' }} />
+                  <img
+                    src={prevPost ? prevPost.imgUrl : previewImg}
+                    alt=""
+                    style={{ maxWidth: '100%' }}
+                  />
                 </figure>
                 <Input
                   type="file"
@@ -68,7 +76,11 @@ const Post = ({
               </Descriptions.Item>
               <Descriptions.Item label="시안 종류">
                 <Select
-                  defaultValue="시안 종류를 선택해주세요."
+                  defaultValue={
+                    prevPost
+                      ? prevPost.category
+                      : '시안 카테고리를 선택해주세요'
+                  }
                   style={{ width: '100%' }}
                   onChange={onSelect}>
                   <Option value="brochure">브로셔</Option>
@@ -96,7 +108,7 @@ const Post = ({
           </Col>
         </Row>
         <Row justify="center" style={{ marginTop: '1rem' }}>
-          <Col xs={24} lg={14}>
+          <Col>
             <Button htmlType="submit">등록</Button>
             <Button onClick={onCancel} danger style={{ marginLeft: '0.5rem' }}>
               취소

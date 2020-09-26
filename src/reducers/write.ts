@@ -7,6 +7,9 @@ import {
   GET_DOWNLOAD_URL,
   GET_DOWNLOAD_URL_FAILURE,
   GET_DOWNLOAD_URL_SUCCESS,
+  SET_CURRENT_POST,
+  UPDATE_POST_FAILURE,
+  UPDATE_POST_SUCCESS,
   WRITE_POST,
   WRITE_POST_FAILURE,
   WRITE_POST_SUCCESS,
@@ -25,6 +28,7 @@ const initialState: MokupResType = {
   postError: null,
   previewImg: '',
   getUrlError: null,
+  currentPostId: null,
 };
 
 const write = handleActions<MokupResType, any>(
@@ -52,10 +56,13 @@ const write = handleActions<MokupResType, any>(
       post: null,
       postError: null,
     }),
-    [WRITE_POST_SUCCESS]: (state, { payload: post }) => ({
-      ...state,
-      post,
-    }),
+    [WRITE_POST_SUCCESS]: (state, { payload: post }) => {
+      console.log(post);
+      return {
+        ...state,
+        post,
+      };
+    },
     [WRITE_POST_FAILURE]: (state, { payload: error }) => ({
       ...state,
       postError: error,
@@ -72,6 +79,27 @@ const write = handleActions<MokupResType, any>(
     [GET_DOWNLOAD_URL_FAILURE]: (state, { payload: error }) => ({
       ...state,
       getUrlError: error,
+    }),
+    [SET_CURRENT_POST]: (state, { payload: post }) => ({
+      ...state,
+      title: post.title,
+      category: post.category,
+      currentPostId: post.id,
+      date: post.date,
+      imgUrl: post.imgUrl,
+      manager: post.manager,
+      year: post.year,
+      month: post.month,
+      previewImg: post.previewImg,
+    }),
+    [UPDATE_POST_SUCCESS]: (state, { payload: { post, postId } }) => ({
+      ...state,
+      post,
+      postId,
+    }),
+    [UPDATE_POST_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      error,
     }),
   },
   initialState

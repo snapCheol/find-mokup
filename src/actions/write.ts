@@ -14,6 +14,12 @@ export const GET_DOWNLOAD_URL = 'write/GET_DOWNLOAD_URL';
 export const GET_DOWNLOAD_URL_SUCCESS = 'write/GET_DOWNLOAD_URL_SUCCESS';
 export const GET_DOWNLOAD_URL_FAILURE = 'write/GET_DOWNLOAD_URL_FAILURE';
 
+export const SET_CURRENT_POST = 'write/SET_CURRENT_POST';
+
+export const UPDATE_POST = 'write/UPDATE_POST' as const;
+export const UPDATE_POST_SUCCESS = 'write/UPDATE_POST_SUCCESS' as const;
+export const UPDATE_POST_FAILURE = 'write/UPDATE_POST_FAILURE' as const;
+
 export const changeField = createAction(
   CHANGE_FIELD,
   ({ key, value }: ChangeFieldType) => ({
@@ -47,4 +53,25 @@ export const writePost = createAction(
 export const getDonwloadUrl = createAction(
   GET_DOWNLOAD_URL,
   (value: any) => value
+);
+
+export const setCurrentPost = createAction(
+  SET_CURRENT_POST,
+  (post: any) => post
+);
+
+export const updatePost = createAction(
+  UPDATE_POST,
+  (
+    postId: string | null,
+    { imgUrl, title, category, manager, date, year, month }: MokupReqType
+  ) => ({
+    imgUrl,
+    title,
+    category,
+    manager,
+    date,
+    year,
+    month,
+  })
 );

@@ -4,14 +4,16 @@ import React from 'react';
 
 type SettingProps = {
   logout: () => void;
+  goWrite: () => void;
 };
 
-const Settings = ({ logout }: SettingProps) => {
+const Settings = ({ logout, goWrite }: SettingProps) => {
   return (
     <div>
       <Dropdown
         overlay={
           <Menu>
+            <Menu.Item onClick={goWrite}>시안 등록</Menu.Item>
             <Menu.Item onClick={logout}>로그아웃</Menu.Item>
           </Menu>
         }>

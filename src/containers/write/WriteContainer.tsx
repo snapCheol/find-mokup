@@ -8,6 +8,7 @@ import {
   changeSelect,
   getDonwloadUrl,
   writePost,
+  updatePost,
 } from '../../actions/write';
 import Write from '../../components/write/Write';
 import { RootState } from '../../reducers';
@@ -24,21 +25,50 @@ const WriteContainer = () => {
     year,
     month,
     previewImg,
+    post,
+    currentPostId,
   } = useSelector((state: RootState) => state.write);
+  const { write } = useSelector((state: RootState) => state);
+  const { post: prevPost } = useSelector((state: RootState) => state.post);
 
   const onSubmit = useCallback(() => {
-    dispatch(
-      writePost({
-        imgUrl,
-        title,
-        category,
-        manager,
-        date,
-        year,
-        month,
-      })
-    );
-  }, [dispatch, imgUrl, title, category, manager, date, year, month]);
+    if (prevPost) {
+      dispatch(
+        updatePost(currentPostId, {
+          imgUrl,
+          title,
+          category,
+          manager,
+          date,
+          year,
+          month,
+        })
+      );
+    } else {
+      dispatch(
+        writePost({
+          imgUrl,
+          title,
+          category,
+          manager,
+          date,
+          year,
+          month,
+        })
+      );
+    }
+  }, [
+    dispatch,
+    imgUrl,
+    title,
+    category,
+    manager,
+    date,
+    year,
+    month,
+    prevPost,
+    currentPostId,
+  ]);
   const onCancel = () => {
     history.goBack();
   };
@@ -91,8 +121,17 @@ const WriteContainer = () => {
     }
   }, [dispatch, previewImg]);
 
+  useEffect(() => {
+    if (post) {
+      const { id } = post;
+      history.push(`/detail/${id}`);
+    }
+  }, [post, history]);
+
   return (
     <Write
+      write={write}
+      prevPost={prevPost}
       imgUrl={imgUrl}
       previewImg={previewImg}
       onSubmit={onSubmit}

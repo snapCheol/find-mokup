@@ -15,13 +15,15 @@ const post = handleActions<any, any>(
   {
     [READ_POST]: (state) => ({
       ...state,
-
       post: null,
       error: null,
     }),
     [READ_POST_SUCCESS]: (state, { payload: post }) => ({
       ...state,
-      post,
+      post: {
+        ...post,
+        id: post.id,
+      },
     }),
     [READ_POST_FAILURE]: (state, { payload: error }) => ({
       ...state,

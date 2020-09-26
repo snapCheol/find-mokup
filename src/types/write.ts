@@ -15,8 +15,10 @@ export type MokupResType = {
   postError: Error | null;
   previewImg: string;
   getUrlError: Error | null;
+  currentPostId: string | null;
 };
 export type MokupReqType = {
+  postId?: string | null;
   title: string | null;
   imgUrl: string;
   category: string;

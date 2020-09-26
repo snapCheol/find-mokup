@@ -7,17 +7,50 @@ import {
   Space,
   Typography,
 } from 'antd';
-import React from 'react';
+import Modal from 'antd/lib/modal/Modal';
+import React, { useState } from 'react';
 import { MokupReqType } from '../../types/write';
 
 type DetailProps = {
   goBack: () => void;
+  onRemove: () => void;
+  goEdit: () => void;
   post: MokupReqType | null;
   loading: boolean;
   error: Error | null;
 };
 
-const Detail = ({ post, loading, error, goBack }: DetailProps) => {
+const Detail = ({
+  post,
+  loading,
+  error,
+  goBack,
+  onRemove,
+  goEdit,
+}: DetailProps) => {
+  const [visibileModal, setVisibileModal] = useState(false);
+  const onShowModal = () => {
+    setVisibileModal(true);
+  };
+  const onHideModal = () => {
+    setVisibileModal(false);
+  };
+
+  const categoryTranslate = (category: string) => {
+    switch (category) {
+      case 'brochure':
+        return '브로셔';
+      case 'catalogue':
+        return '카달로그';
+      case 'leaflet':
+        return '리플렛';
+      case 'etc':
+        return '기타';
+      default:
+        break;
+    }
+  };
+
   if (loading || !post) return null;
   return (
     <>
@@ -36,7 +69,9 @@ const Detail = ({ post, loading, error, goBack }: DetailProps) => {
               </figure>
             </Descriptions.Item>
             <Descriptions.Item label="시안 종류">
-              <Typography.Text>{post.category}</Typography.Text>
+              <Typography.Text>
+                {categoryTranslate(post.category)}
+              </Typography.Text>
             </Descriptions.Item>
             <Descriptions.Item label="작업자">
               <Typography.Text>{post.manager}</Typography.Text>
@@ -49,12 +84,20 @@ const Detail = ({ post, loading, error, goBack }: DetailProps) => {
       </Row>
       <Row justify="center" style={{ marginTop: '1rem' }}>
         <Col xs={24} lg={14}>
-          <Button>수정</Button>
-          <Button danger style={{ marginLeft: '0.5rem' }}>
+          <Button onClick={goEdit}>수정</Button>
+          <Button danger style={{ marginLeft: '0.5rem' }} onClick={onShowModal}>
             삭제
           </Button>
         </Col>
       </Row>
+
+      <Modal
+        title="작업물 삭제"
+        visible={visibileModal}
+        onOk={onRemove}
+        onCancel={onHideModal}>
+        <p>정말 삭제하시겠습니까?</p>
+      </Modal>
     </>
   );
 };
