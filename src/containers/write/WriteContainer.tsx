@@ -6,12 +6,12 @@ import {
   changeField,
   changeFile,
   changeSelect,
+  formInit,
   getDonwloadUrl,
   writePost,
-  updatePost,
-} from '../../actions/write';
+} from '../../redux/actions/write';
 import Write from '../../components/write/Write';
-import { RootState } from '../../reducers';
+import { RootState } from '../../redux/reducers';
 
 const WriteContainer = () => {
   const dispatch = useDispatch();
@@ -26,49 +26,23 @@ const WriteContainer = () => {
     month,
     previewImg,
     post,
-    currentPostId,
   } = useSelector((state: RootState) => state.write);
   const { write } = useSelector((state: RootState) => state);
-  const { post: prevPost } = useSelector((state: RootState) => state.post);
 
   const onSubmit = useCallback(() => {
-    if (prevPost) {
-      dispatch(
-        updatePost(currentPostId, {
-          imgUrl,
-          title,
-          category,
-          manager,
-          date,
-          year,
-          month,
-        })
-      );
-    } else {
-      dispatch(
-        writePost({
-          imgUrl,
-          title,
-          category,
-          manager,
-          date,
-          year,
-          month,
-        })
-      );
-    }
-  }, [
-    dispatch,
-    imgUrl,
-    title,
-    category,
-    manager,
-    date,
-    year,
-    month,
-    prevPost,
-    currentPostId,
-  ]);
+    dispatch(
+      writePost({
+        imgUrl,
+        title,
+        category,
+        manager,
+        date,
+        year,
+        month,
+      })
+    );
+    history.push('/');
+  }, [dispatch, imgUrl, title, category, manager, date, year, month, history]);
   const onCancel = () => {
     history.goBack();
   };
@@ -122,16 +96,12 @@ const WriteContainer = () => {
   }, [dispatch, previewImg]);
 
   useEffect(() => {
-    if (post) {
-      const { id } = post;
-      history.push(`/detail/${id}`);
-    }
-  }, [post, history]);
+    dispatch(formInit());
+  }, [post, history, dispatch]);
 
   return (
     <Write
       write={write}
-      prevPost={prevPost}
       imgUrl={imgUrl}
       previewImg={previewImg}
       onSubmit={onSubmit}

@@ -1,20 +1,33 @@
 import { SettingOutlined } from '@ant-design/icons';
 import { Button, Dropdown, Menu } from 'antd';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 type SettingProps = {
-  logout: () => void;
+  goLogin: () => void;
+  onLogout: () => void;
   goWrite: () => void;
+
+  auth: any;
 };
 
-const Settings = ({ logout, goWrite }: SettingProps) => {
+const Settings = ({ auth, goLogin, onLogout, goWrite }: SettingProps) => {
   return (
     <div>
       <Dropdown
+        trigger={['click']}
         overlay={
           <Menu>
-            <Menu.Item onClick={goWrite}>시안 등록</Menu.Item>
-            <Menu.Item onClick={logout}>로그아웃</Menu.Item>
+            <Menu.Item>
+              <Link to="/write">시안 등록</Link>
+            </Menu.Item>
+            {auth ? (
+              <Menu.Item onClick={onLogout}>로그아웃</Menu.Item>
+            ) : (
+              <Menu.Item>
+                <Link to="/login">로그인</Link>
+              </Menu.Item>
+            )}
           </Menu>
         }>
         <Button shape="circle" icon={<SettingOutlined />} />

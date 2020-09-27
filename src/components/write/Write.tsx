@@ -15,7 +15,6 @@ import Form from 'antd/lib/form/Form';
 
 type WriteProps = {
   write: any;
-  prevPost: any;
   imgUrl: string;
   previewImg: string;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -28,7 +27,6 @@ type WriteProps = {
 
 const Post = ({
   write,
-  prevPost,
   imgUrl,
   previewImg,
   onSubmit,
@@ -53,11 +51,7 @@ const Post = ({
                     maxWidth: '400px',
                     margin: '0 auto',
                   }}>
-                  <img
-                    src={prevPost ? prevPost.imgUrl : previewImg}
-                    alt=""
-                    style={{ maxWidth: '100%' }}
-                  />
+                  <img src={previewImg} alt="" style={{ maxWidth: '100%' }} />
                 </figure>
                 <Input
                   type="file"
@@ -76,11 +70,7 @@ const Post = ({
               </Descriptions.Item>
               <Descriptions.Item label="시안 종류">
                 <Select
-                  defaultValue={
-                    prevPost
-                      ? prevPost.category
-                      : '시안 카테고리를 선택해주세요'
-                  }
+                  defaultValue={'시안 카테고리를 선택해주세요'}
                   style={{ width: '100%' }}
                   onChange={onSelect}>
                   <Option value="brochure">브로셔</Option>

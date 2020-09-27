@@ -4,6 +4,7 @@ import {
   CHANGE_FIELD,
   CHANGE_FILE,
   CHANGE_SELECT,
+  FORM_INIT,
   GET_DOWNLOAD_URL,
   GET_DOWNLOAD_URL_FAILURE,
   GET_DOWNLOAD_URL_SUCCESS,
@@ -100,6 +101,18 @@ const write = handleActions<MokupResType, any>(
     [UPDATE_POST_FAILURE]: (state, { payload: error }) => ({
       ...state,
       error,
+    }),
+    [FORM_INIT]: (state) => ({
+      ...state,
+      title: '',
+      category: '',
+      currentPostId: '',
+      date: '',
+      imgUrl: '',
+      manager: '',
+      year: '',
+      month: '',
+      previewImg: '',
     }),
   },
   initialState

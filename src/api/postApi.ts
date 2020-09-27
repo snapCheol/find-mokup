@@ -1,4 +1,4 @@
-import { MokupReqType } from '../types/write';
+import { MokupReqType } from '../redux/types/write';
 import { dbService, storageService } from './apiConfig';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -18,6 +18,7 @@ export const deletePost = async (postId: string) => {
 export const getListPost = async () => {
   const response = await dbService
     .collection('works')
+    .orderBy('date', 'desc')
     .get()
     .then((doc) => {
       return doc;
@@ -30,6 +31,73 @@ export const getListPost = async () => {
   });
 
   return postList;
+};
+
+export const selectSearchListPost = async ({ year, category }: any) => {
+  if (year === '' && category === '') {
+    const response = await dbService
+      .collection('works')
+      .orderBy('date', 'desc')
+      .get()
+      .then((doc) => {
+        return doc;
+      });
+    const postList = response.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+    return postList;
+  } else if (year !== '' && category !== '') {
+    const response = await dbService
+      .collection('works')
+      .where('year', '==', `${year}`)
+      .where('category', '==', `${category}`)
+      .get()
+      .then((doc) => {
+        return doc;
+      });
+    const postList = response.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+
+    return postList;
+  } else if (year !== '' && category === '') {
+    const response = await dbService
+      .collection('works')
+      .where('year', '==', `${year}`)
+      .get()
+      .then((doc) => {
+        return doc;
+      });
+    const postList = response.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+    return postList;
+  } else if (year === '' && category !== '') {
+    const response = await dbService
+      .collection('works')
+      .where('category', '==', `${category}`)
+      .get()
+      .then((doc) => {
+        return doc;
+      });
+    const postList = response.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+
+    return postList;
+  }
 };
 
 export const writeWork = async ({

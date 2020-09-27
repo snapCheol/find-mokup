@@ -1,14 +1,14 @@
 import { createAction } from 'redux-actions';
 import { ChangeFieldType, MokupReqType } from '../types/write';
 
-export const CHANGE_FIELD = 'write/CHANGE_FIELD' as const;
-export const CHANGE_SELECT = 'write/CHANGE_SELECT' as const;
-export const CHANGE_DATE = 'write/CHANGE_DATE' as const;
-export const CHANGE_FILE = 'write/CHANGE_FILE' as const;
+export const CHANGE_FIELD = 'write/CHANGE_FIELD';
+export const CHANGE_SELECT = 'write/CHANGE_SELECT';
+export const CHANGE_DATE = 'write/CHANGE_DATE';
+export const CHANGE_FILE = 'write/CHANGE_FILE';
 
-export const WRITE_POST = 'write/WRITE_POST' as const;
-export const WRITE_POST_SUCCESS = 'write/WRITE_POST_SUCCESS' as const;
-export const WRITE_POST_FAILURE = 'write/WRITE_POST_FAILURE' as const;
+export const WRITE_POST = 'write/WRITE_POST';
+export const WRITE_POST_SUCCESS = 'write/WRITE_POST_SUCCESS';
+export const WRITE_POST_FAILURE = 'write/WRITE_POST_FAILURE';
 
 export const GET_DOWNLOAD_URL = 'write/GET_DOWNLOAD_URL';
 export const GET_DOWNLOAD_URL_SUCCESS = 'write/GET_DOWNLOAD_URL_SUCCESS';
@@ -16,9 +16,11 @@ export const GET_DOWNLOAD_URL_FAILURE = 'write/GET_DOWNLOAD_URL_FAILURE';
 
 export const SET_CURRENT_POST = 'write/SET_CURRENT_POST';
 
-export const UPDATE_POST = 'write/UPDATE_POST' as const;
-export const UPDATE_POST_SUCCESS = 'write/UPDATE_POST_SUCCESS' as const;
-export const UPDATE_POST_FAILURE = 'write/UPDATE_POST_FAILURE' as const;
+export const UPDATE_POST = 'write/UPDATE_POST';
+export const UPDATE_POST_SUCCESS = 'write/UPDATE_POST_SUCCESS';
+export const UPDATE_POST_FAILURE = 'write/UPDATE_POST_FAILURE';
+
+export const FORM_INIT = 'write/FORM_INIT';
 
 export const changeField = createAction(
   CHANGE_FIELD,
@@ -75,3 +77,5 @@ export const updatePost = createAction(
     month,
   })
 );
+
+export const formInit = createAction(FORM_INIT);

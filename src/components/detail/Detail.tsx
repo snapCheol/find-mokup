@@ -9,9 +9,10 @@ import {
 } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
 import React, { useState } from 'react';
-import { MokupReqType } from '../../types/write';
+import { MokupReqType } from '../../redux/types/write';
 
 type DetailProps = {
+  goHome: () => void;
   goBack: () => void;
   onRemove: () => void;
   goEdit: () => void;
@@ -24,9 +25,9 @@ const Detail = ({
   post,
   loading,
   error,
-  goBack,
   onRemove,
   goEdit,
+  goHome,
 }: DetailProps) => {
   const [visibileModal, setVisibileModal] = useState(false);
   const onShowModal = () => {
@@ -56,7 +57,7 @@ const Detail = ({
     <>
       <Row justify="center">
         <Col xs={24} lg={14}>
-          <PageHeader onBack={goBack} title={<Space>목업 상세</Space>} />
+          <PageHeader onBack={goHome} title={<Space>목업 상세</Space>} />
           <Descriptions layout="vertical" bordered column={1}>
             <Descriptions.Item label={post.title}>
               <figure

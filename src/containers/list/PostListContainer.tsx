@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PostList from '../../components/list/PostList';
-import { RootState } from '../../reducers';
-import { getPostList } from '../../actions/postList';
+import { RootState } from '../../redux/reducers';
+import { getPostList } from '../../redux/actions/postList';
 
 const PostListContainer = () => {
   const dispatch = useDispatch();

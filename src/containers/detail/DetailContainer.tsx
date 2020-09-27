@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, withRouter } from 'react-router-dom';
-import { readPost } from '../../actions/post';
-import { setCurrentPost } from '../../actions/write';
+import { readPost } from '../../redux/actions/post';
+import { setCurrentPost } from '../../redux/actions/write';
 import { deletePost } from '../../api/postApi';
 import Detail from '../../components/detail/Detail';
-import { RootState } from '../../reducers';
+import { RootState } from '../../redux/reducers';
 
 const DetailContainer = ({ match }: any) => {
   const history = useHistory();
@@ -32,6 +32,10 @@ const DetailContainer = ({ match }: any) => {
     history.push('/write');
   }, [post, history, dispatch]);
 
+  const goHome = useCallback(() => {
+    history.push('/');
+  }, [history]);
+
   useEffect(() => {
     dispatch(readPost(postId));
   }, [dispatch, postId]);
@@ -44,6 +48,7 @@ const DetailContainer = ({ match }: any) => {
       goBack={goBack}
       onRemove={onRemove}
       goEdit={goEdit}
+      goHome={goHome}
     />
   );
 };
