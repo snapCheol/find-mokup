@@ -84,7 +84,14 @@ const Detail = ({
         </Col>
       </Row>
       <Row justify="center" style={{ marginTop: '1rem' }}>
-        <Col xs={24} lg={14}>
+        <Col
+          xs={24}
+          lg={14}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginBottom: 30,
+          }}>
           <Button onClick={goEdit}>수정</Button>
           <Button danger style={{ marginLeft: '0.5rem' }} onClick={onShowModal}>
             삭제

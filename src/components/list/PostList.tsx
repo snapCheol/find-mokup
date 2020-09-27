@@ -23,7 +23,7 @@ const PostList = ({ postList, error, loading }: PostListProps) => {
   if (!postList || error) return null;
   return (
     <>
-      <Row justify="center" style={{ marginTop: '2rem' }}>
+      <Row justify="center" style={{ marginTop: '2rem', marginBottom: '2rem' }}>
         <Col xs={24} lg={18}>
           <List
             dataSource={postList}
