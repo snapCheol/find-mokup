@@ -64,10 +64,17 @@ export const setCurrentPost = createAction(
 
 export const updatePost = createAction(
   UPDATE_POST,
-  (
-    postId: string | null,
-    { imgUrl, title, category, manager, date, year, month }: MokupReqType
-  ) => ({
+  ({
+    currentPostId,
+    imgUrl,
+    title,
+    category,
+    manager,
+    date,
+    year,
+    month,
+  }: MokupReqType) => ({
+    currentPostId,
     imgUrl,
     title,
     category,

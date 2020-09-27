@@ -30,9 +30,7 @@ const PostList = ({ postList, error, loading }: PostListProps) => {
             itemLayout="vertical"
             size="large"
             pagination={{
-              onChange: (page) => {
-                console.log(page);
-              },
+              onChange: (page) => {},
               pageSize: 5,
               style: { textAlign: 'center' },
             }}

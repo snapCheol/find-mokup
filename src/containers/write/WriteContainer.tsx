@@ -31,9 +31,9 @@ const WriteContainer = () => {
 
   const onSubmit = useCallback(() => {
     if (currentPostId) {
-      console.log('update');
       dispatch(
-        updatePost(currentPostId, {
+        updatePost({
+          currentPostId,
           imgUrl,
           title,
           category,
@@ -43,6 +43,7 @@ const WriteContainer = () => {
           month,
         })
       );
+      window.alert('수정이 완료되었습니다.');
     } else {
       dispatch(
         writePost({
@@ -55,6 +56,7 @@ const WriteContainer = () => {
           month,
         })
       );
+      window.alert('등록이 완료되었습니다.');
     }
 
     history.push('/');

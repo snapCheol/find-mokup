@@ -115,14 +115,19 @@ export const writeWork = async ({
   return await response.get();
 };
 
-export const updateWork = async (
-  postId: string | null,
-  { title, imgUrl, category, manager, date, year, month }: MokupReqType
-) => {
+export const updateWork = async ({
+  currentPostId,
+  title,
+  imgUrl,
+  category,
+  manager,
+  date,
+  year,
+  month,
+}: MokupReqType) => {
   const response = await dbService
-    .doc(`works/${postId}`)
+    .doc(`works/${currentPostId}`)
     .update({ title, imgUrl, category, manager, date, year, month });
-  console.log(postId);
   return response;
 };
 

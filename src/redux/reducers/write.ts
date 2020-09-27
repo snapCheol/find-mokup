@@ -57,13 +57,10 @@ const write = handleActions<MokupResType, any>(
       post: null,
       postError: null,
     }),
-    [WRITE_POST_SUCCESS]: (state, { payload: post }) => {
-      console.log(post);
-      return {
-        ...state,
-        post,
-      };
-    },
+    [WRITE_POST_SUCCESS]: (state, { payload: post }) => ({
+      ...state,
+      post,
+    }),
     [WRITE_POST_FAILURE]: (state, { payload: error }) => ({
       ...state,
       postError: error,
@@ -93,9 +90,8 @@ const write = handleActions<MokupResType, any>(
       month: post.month,
       previewImg: post.previewImg,
     }),
-    [UPDATE_POST_SUCCESS]: (state, { payload: { postId, post } }) => ({
+    [UPDATE_POST_SUCCESS]: (state, { payload: post }) => ({
       ...state,
-      postId,
       post,
     }),
     [UPDATE_POST_FAILURE]: (state, { payload: error }) => ({
