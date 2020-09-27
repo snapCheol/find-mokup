@@ -6,7 +6,6 @@ export type AuthType = {
 export type AuthStateType = {
   email: string;
   password: string;
-  auth: boolean;
-  authUser: any;
+  user: any;
   authError: Error | null;
 };

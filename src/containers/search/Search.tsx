@@ -10,7 +10,7 @@ import { changeSelect, selectSearch } from '../../redux/actions/postList';
 
 const Search = () => {
   const dispatch = useDispatch();
-  const { auth } = useSelector((state: RootState) => state.auth);
+  const { user } = useSelector((state: RootState) => state.auth);
   const { year, category } = useSelector((state: RootState) => state.postList);
 
   const history = useHistory();
@@ -51,7 +51,7 @@ const Search = () => {
             goLogin={goLogin}
             onLogout={onLogout}
             goWrite={goWrite}
-            auth={auth}
+            user={user}
           />
         </Col>
       </Row>

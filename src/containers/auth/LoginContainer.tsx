@@ -6,7 +6,8 @@ import Login from '../../components/auth/Login';
 import { RootState } from '../../redux/reducers';
 const LoginContainer = () => {
   const dispatch = useDispatch();
-  const { email, password, auth, authError } = useSelector(
+  const { loading } = useSelector((state: RootState) => state.loading);
+  const { email, password, user, authError } = useSelector(
     (state: RootState) => state.auth
   );
 
@@ -30,17 +31,24 @@ const LoginContainer = () => {
   );
 
   useEffect(() => {
-    if (auth) {
+    if (user) {
       history.push('/');
       try {
-        localStorage.setItem('auth', JSON.stringify(auth));
+        localStorage.setItem('auth', JSON.stringify(user));
       } catch (error) {
         console.log('localStroage가 작동하지 않습니다!');
       }
     }
-  }, [history, auth]);
+  }, [history, user]);
 
-  return <Login onLogin={onLogin} onChange={onChange} authError={authError} />;
+  return (
+    <Login
+      onLogin={onLogin}
+      onChange={onChange}
+      authError={authError}
+      loading={loading}
+    />
+  );
 };
 
 export default LoginContainer;

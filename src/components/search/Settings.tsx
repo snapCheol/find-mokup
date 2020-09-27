@@ -8,10 +8,10 @@ type SettingProps = {
   onLogout: () => void;
   goWrite: () => void;
 
-  auth: any;
+  user: any;
 };
 
-const Settings = ({ auth, goLogin, onLogout, goWrite }: SettingProps) => {
+const Settings = ({ user, goLogin, onLogout, goWrite }: SettingProps) => {
   return (
     <div>
       <Dropdown
@@ -21,7 +21,7 @@ const Settings = ({ auth, goLogin, onLogout, goWrite }: SettingProps) => {
             <Menu.Item>
               <Link to="/write">시안 등록</Link>
             </Menu.Item>
-            {auth ? (
+            {user ? (
               <Menu.Item onClick={onLogout}>로그아웃</Menu.Item>
             ) : (
               <Menu.Item>

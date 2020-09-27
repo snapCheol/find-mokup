@@ -9,6 +9,8 @@ export const LOGIN_FAILURE = 'auth/LOGIN_FAILURE';
 export const LOGOUT = 'auth/LOGOUT';
 export const FETCH_USER = 'auth/FETCH_USER';
 
+export const LOGIN_CHECK = 'auth/LOGIN_CHECK';
+
 export const changeField = createAction(
   CHANGE_FIELD,
   ({ key, value }: ChangeFieldType) => ({
