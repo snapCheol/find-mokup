@@ -62,12 +62,16 @@ const Post = ({
                     style={{ maxWidth: '100%' }}
                   />
                 </figure>
-                <Input
-                  type="file"
-                  accept="image/*"
-                  onChange={onFileChange}
-                  required
-                />
+                {currentPostId ? (
+                  <Input type="file" accept="image/*" onChange={onFileChange} />
+                ) : (
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    onChange={onFileChange}
+                    required
+                  />
+                )}
               </Descriptions.Item>
               <Descriptions.Item label="제목">
                 <Input

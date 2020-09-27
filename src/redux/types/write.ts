@@ -18,7 +18,7 @@ export type MokupResType = {
   currentPostId: string | null;
 };
 export type MokupReqType = {
-  postId?: string | null;
+  currentPostId?: string | null;
   title: string | null;
   imgUrl: string;
   category: string;
