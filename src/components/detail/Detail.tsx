@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   Button,
   Col,
@@ -8,8 +9,8 @@ import {
   Typography,
 } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
-import React, { useState } from 'react';
 import { MokupReqType } from '../../redux/types/write';
+import Loader from '../common/Loader';
 
 type DetailProps = {
   goHome: () => void;
@@ -51,8 +52,8 @@ const Detail = ({
         break;
     }
   };
-
-  if (loading || !post) return null;
+  if (loading) return <Loader />;
+  if (!post) return null;
   return (
     <>
       <Row justify="center">
