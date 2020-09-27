@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.js": "/find-mokup/static/js/main.78f6cbc9.chunk.js",
+    "main.js.map": "/find-mokup/static/js/main.78f6cbc9.chunk.js.map",
+    "runtime-main.js": "/find-mokup/static/js/runtime-main.c0137dcc.js",
+    "runtime-main.js.map": "/find-mokup/static/js/runtime-main.c0137dcc.js.map",
+    "static/css/2.cd846464.chunk.css": "/find-mokup/static/css/2.cd846464.chunk.css",
+    "static/js/2.f5f0baef.chunk.js": "/find-mokup/static/js/2.f5f0baef.chunk.js",
+    "static/js/2.f5f0baef.chunk.js.map": "/find-mokup/static/js/2.f5f0baef.chunk.js.map",
+    "index.html": "/find-mokup/index.html",
+    "precache-manifest.31f137f4f6f9133f7e88a616b232fa81.js": "/find-mokup/precache-manifest.31f137f4f6f9133f7e88a616b232fa81.js",
+    "service-worker.js": "/find-mokup/service-worker.js",
+    "static/css/2.cd846464.chunk.css.map": "/find-mokup/static/css/2.cd846464.chunk.css.map",
+    "static/js/2.f5f0baef.chunk.js.LICENSE.txt": "/find-mokup/static/js/2.f5f0baef.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c0137dcc.js",
+    "static/css/2.cd846464.chunk.css",
+    "static/js/2.f5f0baef.chunk.js",
+    "static/js/main.78f6cbc9.chunk.js"
+  ]
+}
