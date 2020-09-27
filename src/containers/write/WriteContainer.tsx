@@ -6,8 +6,8 @@ import {
   changeField,
   changeFile,
   changeSelect,
-  formInit,
   getDonwloadUrl,
+  updatePost,
   writePost,
 } from '../../redux/actions/write';
 import Write from '../../components/write/Write';
@@ -25,24 +25,51 @@ const WriteContainer = () => {
     year,
     month,
     previewImg,
-    post,
+    currentPostId,
   } = useSelector((state: RootState) => state.write);
   const { write } = useSelector((state: RootState) => state);
 
   const onSubmit = useCallback(() => {
-    dispatch(
-      writePost({
-        imgUrl,
-        title,
-        category,
-        manager,
-        date,
-        year,
-        month,
-      })
-    );
+    if (currentPostId) {
+      console.log('update');
+      dispatch(
+        updatePost(currentPostId, {
+          imgUrl,
+          title,
+          category,
+          manager,
+          date,
+          year,
+          month,
+        })
+      );
+    } else {
+      dispatch(
+        writePost({
+          imgUrl,
+          title,
+          category,
+          manager,
+          date,
+          year,
+          month,
+        })
+      );
+    }
+
     history.push('/');
-  }, [dispatch, imgUrl, title, category, manager, date, year, month, history]);
+  }, [
+    dispatch,
+    imgUrl,
+    title,
+    category,
+    manager,
+    date,
+    year,
+    month,
+    history,
+    currentPostId,
+  ]);
   const onCancel = () => {
     history.goBack();
   };
@@ -95,10 +122,6 @@ const WriteContainer = () => {
     }
   }, [dispatch, previewImg]);
 
-  useEffect(() => {
-    dispatch(formInit());
-  }, [post, history, dispatch]);
-
   return (
     <Write
       write={write}
@@ -110,6 +133,7 @@ const WriteContainer = () => {
       onSelect={onSelect}
       onDateChange={onDateChange}
       onFileChange={onFileChange}
+      currentPostId={currentPostId}
     />
   );
 };

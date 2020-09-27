@@ -29,6 +29,7 @@ const post = handleActions<any, any>(
       ...state,
       error,
     }),
+
     [RESET_POST]: () => initialState,
   },
   initialState

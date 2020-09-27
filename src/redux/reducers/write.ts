@@ -93,10 +93,10 @@ const write = handleActions<MokupResType, any>(
       month: post.month,
       previewImg: post.previewImg,
     }),
-    [UPDATE_POST_SUCCESS]: (state, { payload: { post, postId } }) => ({
+    [UPDATE_POST_SUCCESS]: (state, { payload: { postId, post } }) => ({
       ...state,
-      post,
       postId,
+      post,
     }),
     [UPDATE_POST_FAILURE]: (state, { payload: error }) => ({
       ...state,
@@ -106,7 +106,7 @@ const write = handleActions<MokupResType, any>(
       ...state,
       title: '',
       category: '',
-      currentPostId: '',
+      currentPostId: null,
       date: '',
       imgUrl: '',
       manager: '',

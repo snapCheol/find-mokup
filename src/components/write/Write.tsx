@@ -23,6 +23,7 @@ type WriteProps = {
   onSelect: (value: string) => void;
   onDateChange: (date: moment.Moment | null, dateString: string) => void;
   onFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  currentPostId: string | null;
 };
 
 const Post = ({
@@ -35,6 +36,7 @@ const Post = ({
   onSelect,
   onDateChange,
   onFileChange,
+  currentPostId,
 }: WriteProps) => {
   const { Option } = Select;
   return (
@@ -51,7 +53,11 @@ const Post = ({
                     maxWidth: '400px',
                     margin: '0 auto',
                   }}>
-                  <img src={previewImg} alt="" style={{ maxWidth: '100%' }} />
+                  <img
+                    src={currentPostId ? write.imgUrl : previewImg}
+                    alt=""
+                    style={{ maxWidth: '100%' }}
+                  />
                 </figure>
                 <Input
                   type="file"
@@ -64,13 +70,18 @@ const Post = ({
                 <Input
                   type="text"
                   name="title"
+                  value={write.title}
                   onChange={onChangeField}
                   required
                 />
               </Descriptions.Item>
               <Descriptions.Item label="시안 종류">
                 <Select
-                  defaultValue={'시안 카테고리를 선택해주세요'}
+                  defaultValue={
+                    currentPostId
+                      ? write.category
+                      : '시안 카테고리를 선택해주세요'
+                  }
                   style={{ width: '100%' }}
                   onChange={onSelect}>
                   <Option value="brochure">브로셔</Option>
@@ -84,6 +95,7 @@ const Post = ({
                   type="text"
                   name="manager"
                   onChange={onChangeField}
+                  value={write.manager}
                   required
                 />
               </Descriptions.Item>

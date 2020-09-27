@@ -1,13 +1,25 @@
-import { Col, List, Row } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Col, List, Row, Skeleton } from 'antd';
 
 type PostListProps = {
+  loading: Boolean;
   postList: any;
   error: Error | null;
 };
 
-const PostList = ({ postList, error }: PostListProps) => {
+const PostList = ({ postList, error, loading }: PostListProps) => {
+  if (loading) {
+    return (
+      <Row justify="center" style={{ marginTop: '2rem' }}>
+        <Col xs={24} lg={18}>
+          <Skeleton active />
+          <Skeleton active />
+          <Skeleton active />
+        </Col>
+      </Row>
+    );
+  }
   if (!postList || error) return null;
   return (
     <>
@@ -27,10 +39,10 @@ const PostList = ({ postList, error }: PostListProps) => {
             renderItem={(item: any) => (
               <List.Item
                 key={item.id}
-                extra={<img width={'272'} alt="logo" src={item.imgUrl} />}>
+                extra={<img width={'150'} alt="logo" src={item.imgUrl} />}>
                 <List.Item.Meta
                   title={<Link to={`/detail/${item.id}`}>{item.title}</Link>}
-                  description={item.manager}
+                  description={item.year}
                 />
               </List.Item>
             )}

@@ -8,7 +8,7 @@ const getDownloadUrlSaga = createRequestSaga(
   GET_DOWNLOAD_URL,
   postAPI.storageWork
 );
-const updateWorkSaga = createRequestSaga(UPDATE_POST, postAPI.upateWork);
+const updateWorkSaga = createRequestSaga(UPDATE_POST, postAPI.updateWork);
 
 export function* writeSaga() {
   yield takeLatest(WRITE_POST, writeWorkSaga);
