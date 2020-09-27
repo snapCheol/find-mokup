@@ -20,6 +20,15 @@
 - Typescript
 - Firebase
 
+## Preview Demo
+
+-[Preview](https://snapcheol.github.io/find-mokup)
+
+**테스트 계정**
+
+- id: guest@find-mokup.com
+- pw: testtest
+
 ## 의존성 패키지 설치
 
 ```
