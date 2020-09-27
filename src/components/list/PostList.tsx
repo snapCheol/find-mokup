@@ -33,13 +33,13 @@ const PostList = ({ postList, error, loading }: PostListProps) => {
               onChange: (page) => {
                 console.log(page);
               },
-              pageSize: 3,
+              pageSize: 5,
               style: { textAlign: 'center' },
             }}
             renderItem={(item: any) => (
               <List.Item
                 key={item.id}
-                extra={<img width={'150'} alt="logo" src={item.imgUrl} />}>
+                extra={<img width={'50'} alt="logo" src={item.imgUrl} />}>
                 <List.Item.Meta
                   title={<Link to={`/detail/${item.id}`}>{item.title}</Link>}
                   description={item.year}

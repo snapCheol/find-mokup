@@ -16,7 +16,6 @@ function App() {
     authService.onAuthStateChanged((user) => {
       if (user) {
         dispatch(fetchUser(user));
-        console.log(user);
       } else {
         dispatch(logout());
       }

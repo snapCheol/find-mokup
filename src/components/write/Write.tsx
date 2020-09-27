@@ -44,7 +44,10 @@ const Post = ({
       <Form onFinish={onSubmit}>
         <Row justify="center">
           <Col xs={24} lg={14}>
-            <PageHeader onBack={onCancel} title={<Space>목업 등록</Space>} />
+            <PageHeader
+              onBack={onCancel}
+              title={<Space>목업 {currentPostId ? '수정' : '등록'}</Space>}
+            />
             <Descriptions layout="vertical" bordered column={1}>
               <Descriptions.Item label="이미지 등록">
                 <figure
